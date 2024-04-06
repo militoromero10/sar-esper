@@ -1,11 +1,9 @@
 package com.esper.cep.controllers;
 
 import com.esper.cep.components.SarComplexEventProcessor;
+import com.esper.cep.records.BonitaBody;
 import com.esper.cep.records.MarketingDesign;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
@@ -20,13 +18,10 @@ public class EsperController {
         this.sarCEP = sarCEP;
     }
 
-
-    @GetMapping("/{user}/{name}/{budget}")
-    public String marketingDesignEvent(@PathVariable String user, @PathVariable String name, @PathVariable Double budget) {
-        var md1 = new MarketingDesign(user, name, budget, LocalDate.now(), Boolean.TRUE);
+    @PostMapping
+    public void marketingDesignEvent(@RequestBody BonitaBody body) {
+        var md1 = new MarketingDesign(body.user(), body.project(), body.budget(), LocalDate.now(), Boolean.FALSE);
         sarCEP.createMarketingDesignEvent(md1);
-        return "buena esa!";
     }
-
 }
 
