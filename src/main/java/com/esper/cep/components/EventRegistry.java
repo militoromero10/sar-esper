@@ -9,26 +9,19 @@ import com.espertech.esper.compiler.client.EPCompiler;
 import com.espertech.esper.runtime.client.EPDeploymentService;
 import com.espertech.esper.runtime.client.UpdateListener;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class EventRegistry {
 
-    private final com.espertech.esper.common.client.configuration.Configuration esperConfiguration;
+    private final Configuration esperConfiguration;
     private final EPCompiler epCompiler;
     private final EPDeploymentService epDeploymentService;
     private final FraudListener fraudListener;
     private final OverBudgetListener overBudgetListener;
     private final EventListener eventListener;
-
-    public EventRegistry(Configuration esperConfiguration, EPCompiler epCompiler, EPDeploymentService epDeploymentService, FraudListener fraudListener, OverBudgetListener overBudgetListener, EventListener eventListener) {
-        this.esperConfiguration = esperConfiguration;
-        this.epCompiler = epCompiler;
-        this.epDeploymentService = epDeploymentService;
-        this.fraudListener = fraudListener;
-        this.overBudgetListener = overBudgetListener;
-        this.eventListener = eventListener;
-    }
 
     @PostConstruct
     public void registry() throws Exception {

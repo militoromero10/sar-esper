@@ -7,19 +7,17 @@ import com.espertech.esper.common.client.EventBean;
 import com.espertech.esper.runtime.client.EPRuntime;
 import com.espertech.esper.runtime.client.EPStatement;
 import com.espertech.esper.runtime.client.UpdateListener;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Map;
 
 @Component
+@RequiredArgsConstructor
 public class FraudListener implements UpdateListener {
 
     private final EmailService emailService;
-
-    public FraudListener(EmailService emailService) {
-        this.emailService = emailService;
-    }
 
     @Override
     public void update(EventBean[] newEvents, EventBean[] oldEvents, EPStatement statement, EPRuntime runtime) {

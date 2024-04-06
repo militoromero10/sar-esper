@@ -1,5 +1,10 @@
 package com.esper.cep.components;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public enum EventQuery {
     ALL("@name('all') select * from MarketingDesignEvent", "all"),
     FRAUD("""
@@ -17,17 +22,4 @@ public enum EventQuery {
 
     private final String query;
     private final String stateName;
-
-    EventQuery(String query, String stateName) {
-        this.query = query;
-        this.stateName = stateName;
-    }
-
-    public String getQuery() {
-        return query;
-    }
-
-    public String getStateName() {
-        return stateName;
-    }
 }

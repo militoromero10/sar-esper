@@ -6,16 +6,14 @@ import com.espertech.esper.common.client.EventBean;
 import com.espertech.esper.runtime.client.EPRuntime;
 import com.espertech.esper.runtime.client.EPStatement;
 import com.espertech.esper.runtime.client.UpdateListener;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class OverBudgetListener implements UpdateListener {
 
     private final EmailService emailService;
-
-    public OverBudgetListener(EmailService emailService) {
-        this.emailService = emailService;
-    }
 
     @Override
     public void update(EventBean[] newEvents, EventBean[] oldEvents, EPStatement statement, EPRuntime runtime) {
