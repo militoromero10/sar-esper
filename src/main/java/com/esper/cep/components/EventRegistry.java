@@ -1,7 +1,8 @@
 package com.esper.cep.components;
 
-import com.esper.cep.listeners.EventListener;
+//import com.esper.cep.listeners.EventListener;
 import com.esper.cep.listeners.FraudListener;
+import com.esper.cep.listeners.NoEnoughInfoListener;
 import com.esper.cep.listeners.OverBudgetListener;
 import com.espertech.esper.common.client.configuration.Configuration;
 import com.espertech.esper.compiler.client.CompilerArguments;
@@ -21,13 +22,15 @@ public class EventRegistry {
     private final EPDeploymentService epDeploymentService;
     private final FraudListener fraudListener;
     private final OverBudgetListener overBudgetListener;
-    private final EventListener eventListener;
+//    private final EventListener eventListener;
+    private final NoEnoughInfoListener noEnoughInfoListener;
 
     @PostConstruct
     public void registry() throws Exception {
-        register(EventQuery.ALL.getQuery(), EventQuery.ALL.getStateName(), eventListener);
-        register(EventQuery.REJECTED_DESIGN.getQuery(), EventQuery.REJECTED_DESIGN.getStateName(), overBudgetListener);
+//        register(EventQuery.ALL.getQuery(), EventQuery.ALL.getStateName(), eventListener);
+        register(EventQuery.REJECTED_DESIGN.getQuery(), EventQuery.REJECTED_DESIGN.getStateName(), noEnoughInfoListener);
         register(EventQuery.FRAUD.getQuery(), EventQuery.FRAUD.getStateName(), fraudListener);
+        register(EventQuery.REJECTED_PROJECT.getQuery(), EventQuery.REJECTED_PROJECT.getStateName(), overBudgetListener);
     }
 
     private void register(String query, String statementName, UpdateListener listener) throws Exception {

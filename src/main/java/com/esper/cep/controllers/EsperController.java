@@ -17,7 +17,7 @@ public class EsperController {
 
     @PostMapping
     public void marketingDesignEvent(@RequestBody BonitaBody body) {
-        var md1 = new MarketingDesign(body.user(), body.project(), body.budget(), LocalDate.now(), Boolean.FALSE);
+        var md1 = new MarketingDesign(body.user(), body.project(), body.budget(), LocalDate.now(), body.approval());
         sarCEP.createMarketingDesignEvent(md1);
     }
 }

@@ -11,24 +11,25 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class OverBudgetListener implements UpdateListener {
+public class NoEnoughInfoListener implements UpdateListener {
 
     private final EmailService emailService;
 
     @Override
     public void update(EventBean[] newEvents, EventBean[] oldEvents, EPStatement statement, EPRuntime runtime) {
         var name = newEvents[0].get("name").toString();
-        var amount = Double.parseDouble(newEvents[0].get("amount").toString());
+        var budget = newEvents[0].get("budget").toString();
+        var date = newEvents[0].get("date").toString();
 
         String to = "militoromero10@gmail.com";
-        String subject = "Se ha detectado sobrecostos";
+        String subject = "Se ha detectado falencia en requisitos";
         String text = """
-                Proyecto '%s' esta en sobrecostos por un valor de %s COP.
-                Presupuesto maximo: 10'000.000 COP
-                Valor actual: %s COP
+                Proyecto [%s] con las siguientes caracteriticas ha sido rechazado continuamente
+                - Presupuesto: %s COP
+                - Fecha: %s
+                - Revisar caso antes de reprocesar.
                 """;
-        String msg = String.format(text, name, amount-10000000d, amount);
-
+        String msg = String.format(text, name, budget, date);
         var mail = new Mail(to,subject,msg);
 
         emailService.sendSimpleMessage(mail);

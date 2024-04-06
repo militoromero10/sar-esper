@@ -21,24 +21,36 @@ public class FraudListener implements UpdateListener {
 
     @Override
     public void update(EventBean[] newEvents, EventBean[] oldEvents, EPStatement statement, EPRuntime runtime) {
-        var aMap = (Map<String, Object>) newEvents[0].get("i");
+        var e1 = (Map<String, Object>) newEvents[0].get("i");
+        var e2 = (Map<String, Object>) newEvents[0].get("j");
 
-        String userA = aMap.get("user").toString();
-        String locationA = aMap.get("name").toString();
-        Double budgetA = Double.parseDouble(aMap.get("budget").toString());
-        LocalDate ldA = LocalDate.parse(aMap.get("date").toString());
+        String user = e1.get("user").toString();
+        String name = e1.get("name").toString();
+        Double budget = Double.parseDouble(e1.get("budget").toString());
+        LocalDate ld = LocalDate.parse(e1.get("date").toString());
+
+        String user2 = e2.get("user").toString();
+        String name2 = e2.get("name").toString();
+        Double budget2 = Double.parseDouble(e2.get("budget").toString());
+        LocalDate ld2 = LocalDate.parse(e2.get("date").toString());
 
         String fmt = """
-                Los ultimos 3 proyectos tienen las mismas caracteristicas y han sido llevadas a cabo por le mismo usuario
-                
-                Usuario: %s
-                Proyecto: %s
-                Presupuesto: %s
-                Fecha: %s
-                
-                Rectifique antes de aprobar las siguientes etapas.
-                """;
-        var msg = String.format(fmt, userA, locationA, budgetA, ldA);
+            Los ultimos 3 proyectos tienen las mismas caracteristicas y han sido llevadas a cabo por le mismo usuario
+            
+            Usuario 1: %s
+            Proyecto: %s
+            Presupuesto: %s
+            Fecha: %s
+            
+            Usuario 2: %s
+            Proyecto: %s
+            Presupuesto: %s
+            Fecha: %s
+            
+            Rectifique antes de aprobar las siguientes etapas.
+            """;
+        var msg = String.format(fmt, user, name, budget, ld, user2, name2, budget2, ld2);
+
         var to ="militoromero10@gmail.com";
         var subject = "Motor de Eventos Complejos a detectado un posible fraude.";
 
