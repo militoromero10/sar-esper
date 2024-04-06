@@ -1,9 +1,7 @@
 package com.esper.cep.components;
 
-import com.esper.cep.records.Customer;
-import com.esper.cep.records.events.CustomerCreatedEvent;
-import com.esper.cep.records.events.WithdrawRequest;
-import com.esper.cep.records.events.WithdrawalEvent;
+import com.esper.cep.records.MarketingDesign;
+import com.esper.cep.records.events.MarketingDesignEvent;
 import com.espertech.esper.runtime.client.EPEventService;
 import org.springframework.stereotype.Component;
 
@@ -18,14 +16,8 @@ public class SarComplexEventProcessor {
         this.eventService = eventService;
     }
 
-    public void createEvent(Customer customer) {
-        Map<String, Object> name = Map.of("name", customer.name(), "age", customer.age());
-        Class<?> customerCreatedEventClass = CustomerCreatedEvent.class;
-        this.eventService.sendEventMap(name, customerCreatedEventClass.getSimpleName());
-    }
-
-    public void withdraw(WithdrawRequest withdrawRequest) {
-        this.eventService.sendEventMap(Map.of("user", withdrawRequest.user().name(), "location", withdrawRequest.location(), "amount", withdrawRequest.amount()),
-                WithdrawalEvent.class.getSimpleName());
+    public void createMarketingDesignEvent(MarketingDesign marketingDesign) {
+        Map<String, Object> name = Map.of("user", marketingDesign.user(), "name", marketingDesign.name(), "budget", marketingDesign.budget(), "date", marketingDesign.date(), "approval", marketingDesign.approval());
+        this.eventService.sendEventMap(name, MarketingDesignEvent.class.getSimpleName());
     }
 }
