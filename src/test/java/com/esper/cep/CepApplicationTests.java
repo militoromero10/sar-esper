@@ -1,10 +1,10 @@
-package com.javeriana.esper;
+package com.esper.cep;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EsperApplicationTests {
+class CepApplicationTests {
 
 	@Test
 	void contextLoads() {
