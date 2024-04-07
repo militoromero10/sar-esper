@@ -35,7 +35,7 @@ public class FraudListener implements UpdateListener {
         LocalDate ld2 = LocalDate.parse(e2.get("date").toString());
 
         String fmt = """
-            Los ultimos 3 proyectos tienen las mismas caracteristicas y han sido llevadas a cabo por le mismo usuario
+            El proyecto '%s' tienen las mismas caracteristicas y ha sido llevado a cabo por diferentes usuarios
             
             Usuario 1: %s
             Proyecto: %s
@@ -49,7 +49,7 @@ public class FraudListener implements UpdateListener {
             
             Rectifique antes de aprobar las siguientes etapas.
             """;
-        var msg = String.format(fmt, user, name, budget, ld, user2, name2, budget2, ld2);
+        var msg = String.format(fmt, name, user, name, budget, ld, user2, name2, budget2, ld2);
 
         var to ="militoromero10@gmail.com";
         var subject = "Motor de Eventos Complejos a detectado un posible fraude.";

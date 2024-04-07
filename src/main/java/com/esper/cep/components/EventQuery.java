@@ -8,13 +8,13 @@ import lombok.RequiredArgsConstructor;
 public enum EventQuery {
     ALL("@name('all') select * from MarketingDesignEvent", "all"),
     FRAUD("""
-            create context PartitionedByUser partition by user from MarketingDesignEvent;
+            create context PartitionedByName partition by name from MarketingDesignEvent;
 
                 @name('fraud-projects')
-                context PartitionedByUser select * from pattern [
+                context PartitionedByName select * from pattern [
                     every  (
                         i = MarketingDesignEvent ->
-                        j = MarketingDesignEvent ( user = i.user, name = i.name) where timer:within(5 minutes)
+                        j = MarketingDesignEvent ( name = i.name, user != i.user) where timer:within(5 minutes)
                     )
                 ]
             """, "fraud-projects"),
