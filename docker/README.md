@@ -12,7 +12,7 @@ curl --location 'localhost:8088/v1/sar/cep' \
 --header 'Content-Type: application/json' \
 --data '{
     "user": "pepe",
-    "project":"marketing 122",
+    "project":"marketing-1",
     "budget": 5000000.9,
     "approval": true
 }'

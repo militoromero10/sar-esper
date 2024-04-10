@@ -20,7 +20,7 @@ public class OverBudgetListener implements UpdateListener {
         var name = newEvents[0].get("name").toString();
         var amount = Double.parseDouble(newEvents[0].get("amount").toString());
 
-        String to = "militoromero10@gmail.com";
+        String to = "lospolloshermanosprocesosdeneg@gmail.com";
         String subject = "Se ha detectado sobrecostos";
         String text = """
                 Proyecto '%s' esta en sobrecostos por un valor de %s COP.

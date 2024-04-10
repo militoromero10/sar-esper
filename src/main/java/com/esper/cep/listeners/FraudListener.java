@@ -51,7 +51,7 @@ public class FraudListener implements UpdateListener {
             """;
         var msg = String.format(fmt, name, user, name, budget, ld, user2, name2, budget2, ld2);
 
-        var to ="militoromero10@gmail.com";
+        var to ="lospolloshermanosprocesosdeneg@gmail.com";
         var subject = "Motor de Eventos Complejos a detectado un posible fraude.";
 
         var mail = new Mail(to,subject,msg);

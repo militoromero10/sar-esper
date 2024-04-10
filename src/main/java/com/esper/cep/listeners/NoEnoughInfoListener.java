@@ -21,7 +21,7 @@ public class NoEnoughInfoListener implements UpdateListener {
         var budget = newEvents[0].get("budget").toString();
         var date = newEvents[0].get("date").toString();
 
-        String to = "militoromero10@gmail.com";
+        String to = "lospolloshermanosprocesosdeneg@gmail.com";
         String subject = "Se ha detectado falencia en requisitos";
         String text = """
                 Proyecto [%s] con las siguientes caracteriticas ha sido rechazado continuamente
